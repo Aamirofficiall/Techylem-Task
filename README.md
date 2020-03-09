@@ -1,9 +1,9 @@
 <h1>Techylem Task</h1>
 
 <h2>Introduction<h2>
-<p>
+
 This is a sample project to show working of a website which consist of different type of users(CEO,CTO,HR,SD,JD).Each user is allowedto make a post and perform crud operation on it.
-</p>
+
   <h1>Autherizations</h1>
   <ul>
 <li>Only admin is allowed to register new user.</li>
