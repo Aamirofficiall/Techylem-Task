@@ -82,7 +82,7 @@ def home(request):
     if (User.objects.filter(Q(profile__rank='jd') & Q(profile__user=request.user.id)).count())==1 :
         is_jd=True        
     role={'posts':posts,'ceo':is_ceo,'cto':is_cto,'hr':is_hr,'sd':is_sd,'jd':is_jd}
-    return render(request,'home.html',role)
+    return render(request,'home.html',{'is_ceo':is_ceo,'posts':posts})
 
 def login(request):
 
