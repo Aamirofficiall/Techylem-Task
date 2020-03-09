@@ -47,24 +47,6 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 
 @login_required
 def home(request):
-    # is_ceo=False
-    
-    # obj=User.objects.filter(profile__rank='ceo').count()
-    # obj1=User.objects.filter(profile__rank='cto').count()
-    # if obj==1:
-    #     posts=Post.objects.all()
-    #     is_ceo==True
-    # if obj1==1:
-    #     user=User.objects.filter(Q(profile__rank='cto')|Q(profile__rank='hr'))
-    #     id=[p.id for p in user]
-    #     post=Post.objects.filter(author__in=id)
-    #     posts=Post(post)
-    
-    #     # if rank=='cto':
-    # #     # user=Profile.objects.filter(Q(rank='cto'))
-    # #     # id=[p.id for p in user]
-    # #     # posts=Post.objects.filter(author__in=id)
-    # #     posts=Post.objects.filter(Profile__rank=='cto')
     is_ceo=False
     is_cto=False
     is_hr=False
@@ -74,14 +56,17 @@ def home(request):
     if (User.objects.filter(Q(profile__rank='ceo') & Q(profile__user=request.user.id)).count())==1 :
         is_ceo=True        
     if (User.objects.filter(Q(profile__rank='cto') & Q(profile__user=request.user.id)).count())==1 :
+        posts=Post.objects.filter(author__in=User.objects.filter(Q(profile__rank='cto')|Q(profile__rank='hr')|Q(profile__rank='sd')|Q(profile__rank='jd')))
         is_cto=True        
     if (User.objects.filter(Q(profile__rank='hr') & Q(profile__user=request.user.id)).count())==1 :
+        posts=Post.objects.filter(author__in=User.objects.filter(Q(profile__rank='hr')|Q(profile__rank='sd')|Q(profile__rank='jd')))
         is_hr=True        
     if (User.objects.filter(Q(profile__rank='sd') & Q(profile__user=request.user.id)).count())==1 :
+        posts=Post.objects.filter(author__in=User.objects.filter(Q(profile__rank='sd')|Q(profile__rank='jd')))
         is_sd=True        
     if (User.objects.filter(Q(profile__rank='jd') & Q(profile__user=request.user.id)).count())==1 :
+        posts=Post.objects.filter(author__in=User.objects.filter(Q(profile__rank='jd')))
         is_jd=True        
-    role={'posts':posts,'ceo':is_ceo,'cto':is_cto,'hr':is_hr,'sd':is_sd,'jd':is_jd}
     return render(request,'home.html',{'is_ceo':is_ceo,'posts':posts})
 
 def login(request):
