@@ -6,7 +6,7 @@
 
   <h2>Autherizations</h2>
   <ul>
-<li>Only admin is allowed to register new user.</li>
+<li>Only SuperUser(CEO) is allowed to register new user.</li>
 <li>Each user can only create posts and perform CRUD for which user created</li>
   </ul>
 <h2>Setup</h2>
