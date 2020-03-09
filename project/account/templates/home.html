@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container" style="margin-bottom:100px">
+ 
+
+    {% if is_ceo %}
+    <a class=" btn mt-2 btn-block btn-outline-info" href="{% url 'create'   %}" style="font-size: 30px;"> Add new User<span style="font-size: 36px;">+</span></a>
+      
+    {% endif %}
+    {% if user.is_authenticated %}
+    <a class="col-md-4 offset-md-4 btn mt-2 btn-block btn-outline-info" href="{% url 'create-post' user.id  %}" style="font-size: 30px;"> Create Post<span style="font-size: 36px;">+</span></a>
+    
+    <h1>  Wellcome {{user.username}}    </h1> 
+
+   
+   {% endif %}
+
+
+{% for post in posts  %}
+<article class="media content-section border">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ post.author }}</a>
+        <small class="text-muted">{{ post.date_posted|date:"F d,Y" }}</small>
+      </div>
+      <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+      <p class="article-content">{{ post.content }}</p>
+    </div>
+  </article>
+{% endfor %}
+</div>
+
+
+{% endblock content %}
+
